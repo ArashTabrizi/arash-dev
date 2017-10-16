@@ -38,7 +38,6 @@ module.exports = function(app) {
             if (err)
                 res.send(err);
 
-            // get and return all the todos after you create another
             Todo.find(function(err, todos) {
                 if (err)
                     res.send(err)

@@ -30,6 +30,15 @@ module.exports = function(app) {
 
     });
 
+    app.post('/api/todos/search', function(req, res) {
+
+        Todo.find({text:'arash' }, function(err, todos) {
+            if (err)
+                res.send(err)
+            // res.json(todos); 
+        });
+            });
+        
     // delete a todo
     app.delete('/api/todos/:todo_id', function(req, res) {
         Todo.remove({

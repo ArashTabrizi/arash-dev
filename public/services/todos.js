@@ -1,12 +1,12 @@
-// js/services/todos.js
 angular.module('todoService', [])
 
-    // super simple service
-    // each function returns a promise object 
     .factory('Todos', function($http) {
         return {
             get : function() {
                 return $http.get('/api/todos');
+            },
+            search : function() {
+                return $http.post('/api/todos/search');
             },
             create : function(todoData) {
                 return $http.post('/api/todos', todoData);

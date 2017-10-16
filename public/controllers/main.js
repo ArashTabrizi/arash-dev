@@ -23,8 +23,9 @@ angular.module('todoController', [])
         };
 
         $scope.findToDo = function() {
-                $http.post('/api/todos', $scope.formData)
+                $http.post('/api/todos/search', $scope.formData)
                         .success(function(data) {
+                                console.log(data);
                                 $scope.formData = {}; 
                                 $scope.todos = data;
                         })

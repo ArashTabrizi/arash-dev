@@ -1,13 +1,11 @@
-var Todo = require('./models/todo');
+var Todo = require('./model/todo');
 
 module.exports = function(app) {
 
     app.get('/api/todos', function(req, res) {
-
         Todo.find(function(err, todos) {
             if (err)
                 res.send(err)
-
             res.json(todos); 
         });
     });
@@ -20,29 +18,43 @@ module.exports = function(app) {
         }, function(err, todo) {
             if (err)
                 res.send(err);
-
             Todo.find(function(err, todos) {
                 if (err)
                     res.send(err)
                 res.json(todos);
             });
         });
+    });
 
+    app.put('/api/todos/:id', function(req, res) {
+        var id = req.params.id;
+        Todo.update({_id: id}, req, {upsert: true}, function (err) {
+                if (err) throw err;
+                res.json(req);
+            });
     });
 
     app.post('/api/todos/search', function(req, res) {
-
         Todo.find({text:'arash' }, function(err, todos) {
             if (err)
                 res.send(err)
-            // res.json(todos); 
+             res.json(todos); 
         });
             });
-        
+    
+    app.get('/api/todos/:id', function(req, res) {
+        var id = req.params.id;
+        Todo.findById(id, function(err, todos) {
+            if (err)
+                res.send(err)
+             res.json(todos); 
+        });
+            });
+    
     // delete a todo
-    app.delete('/api/todos/:todo_id', function(req, res) {
+    app.delete('/api/todos/:id', function(req, res) {
         Todo.remove({
-            _id : req.params.todo_id
+            _id : req.body.id
         }, function(err, todo) {
             if (err)
                 res.send(err);

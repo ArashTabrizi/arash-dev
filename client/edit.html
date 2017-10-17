@@ -1,0 +1,10 @@
+<form  name="editForm" novalidate="">
+    
+       <div class="form-group">
+           <label>Note</label>
+           <textarea rows="5" class="form-control" ng-class="{'is-invalid':editForm.note.$invalid && editForm.$submitted}"  ng-model="note" name="note" required=""></textarea>
+       </div>
+       <button ng-hide="isEdit" type="submit" class="btn btn-primary" ng-click="addNote(editForm)">Submit</button>
+       <button ng-show="isEdit" type="submit" class="btn btn-primary" ng-click="editNote(editForm)">Edit</button>
+       <a href="#!" class="btn btn-warning">Back To List</a>
+    </form>
